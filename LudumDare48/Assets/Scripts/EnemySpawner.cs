@@ -20,10 +20,13 @@ public class EnemySpawner : MonoBehaviour
     private EnemyFish[] scriptTypes;
     private EnemyFish type;
 
+    public Transform[] waypoints;
+
     private void Awake()
     {
 
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -43,7 +46,7 @@ public class EnemySpawner : MonoBehaviour
     {
         EnemyPrefabs[enemiesSpawned].transform.position = new Vector2(transform.position.x + Random.RandomRange(-spawnLocVariance.x, spawnLocVariance.x), transform.position.y +  Random.RandomRange(-spawnLocVariance.y, spawnLocVariance.y));
         EnemyPrefabs[enemiesSpawned].SetActive(true);
-        EnemyPrefabs[enemiesSpawned].GetComponent<EnemyFish>().initValues();
+        EnemyPrefabs[enemiesSpawned].GetComponent<EnemyFish>().initValues(waypoints);
 
         enemiesSpawned++;
 
@@ -51,5 +54,7 @@ public class EnemySpawner : MonoBehaviour
         {
             spawning = false;
         }
+
+        
     }
 }

@@ -98,6 +98,11 @@ public class CatController : MonoBehaviour
         {
             TakeDamage(collision.GetComponent<EnemyFish>().damage);
         }
+
+        if(collision.GetComponent<Spike>())
+        {
+            TakeDamage(collision.GetComponent<Spike>().damage);
+        }
     }
 
     private void TakeDamage(float _damage)

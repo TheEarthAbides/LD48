@@ -34,7 +34,7 @@ public abstract class EnemyFish : MonoBehaviour
 
     }
 
-    public virtual void initValues()
+    public virtual void initValues(Transform [] _waypoints)
     {
        
     }
@@ -49,7 +49,7 @@ public abstract class EnemyFish : MonoBehaviour
         }
     }
 
-    public void Die()
+    public virtual void Die()
     {
         transform.gameObject.SetActive(false);
     }
