@@ -7,6 +7,9 @@ public class CatController : MonoBehaviour
 
     Rigidbody2D rb;
     Transform trans;
+
+    public float health = 100;
+
     float vertSpeed = 0.1f;
     float horSpeed = 0.1f;
     public GameObject[] Bullets;
@@ -86,6 +89,25 @@ public class CatController : MonoBehaviour
         {
             currentBulletIndex = 0;
 
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<EnemyFish>())
+        {
+            TakeDamage(collision.GetComponent<EnemyFish>().damage);
+        }
+    }
+
+    private void TakeDamage(float _damage)
+    {
+        health -= _damage;
+
+        if(health <= 0)
+        {
+            trans.gameObject.SetActive(false);
+            GameManager.instance.GameOver();
         }
     }
 }

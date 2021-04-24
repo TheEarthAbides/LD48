@@ -4,15 +4,17 @@ using UnityEngine;
 
 public abstract class EnemyFish : MonoBehaviour
 {
-
+    public float damage = 100;
     public float health = 100;
-    private Transform trans;
-    private Rigidbody2D rb;
+    protected Transform trans;
+    protected Rigidbody2D rb;
+    protected SpriteRenderer sr;
 
     private void Awake()
     {
         trans = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
@@ -27,16 +29,21 @@ public abstract class EnemyFish : MonoBehaviour
         FishMovement();
     }
 
-    public void FishMovement()
+    public virtual void FishMovement()
     {
 
+    }
+
+    public virtual void initValues()
+    {
+       
     }
 
     public void TakeDamage(float damage)
     {
         health -= damage;
-
-        if(health < 0)
+        sr.color = Color.white;
+        if(health <= 0)
         {
             Die();
         }
@@ -49,7 +56,11 @@ public abstract class EnemyFish : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        TakeDamage(collision.GetComponent<Bullet>().damage);
-        collision.gameObject.SetActive(false);
+        if(collision.GetComponent<Bullet>())
+        {
+            TakeDamage(collision.GetComponent<Bullet>().damage);
+            collision.gameObject.SetActive(false);
+        }
+
     }
 }

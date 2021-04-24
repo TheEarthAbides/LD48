@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JellyFish : EnemyFish
 {
+    public float horSpeed = -0.05f;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,11 @@ public class JellyFish : EnemyFish
     // Update is called once per frame
     void Update()
     {
-        
+        FishMovement();
     }
+
+    public override void FishMovement()
+    {
+        rb.MovePosition(new Vector2(trans.position.x + horSpeed, trans.position.y));
+    }    
 }
