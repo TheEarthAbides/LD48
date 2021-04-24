@@ -11,7 +11,10 @@ public class GameManager : MonoBehaviour
         public EnemySpawner[] spawners;
     }
 
-
+    public Transform topBound;
+    public Transform leftBound;
+    public Transform rightBound;
+    public Transform botBound;
 
     public int stepIndex;
     public LevelStep[] steps;
@@ -30,7 +33,10 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         stepIndex = 0;
-        
+        UIManager.instance.pointsLabel.text = "0";
+        UIManager.instance.bombCount.text = "3";
+        UIManager.instance.totalPoints = 0;
+
         for (int i = 0; i < steps[stepIndex].spawners.Length; i++)
         {
             steps[stepIndex].spawners[i].gameObject.SetActive(true);
@@ -73,5 +79,10 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         SceneManager.LoadScene(2);
+    }
+
+    public void RollForUpgrade(Vector3 _pos)
+    {
+
     }
 }

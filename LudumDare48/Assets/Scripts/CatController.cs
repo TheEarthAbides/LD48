@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CatController : MonoBehaviour
 {
-
+    public static CatController instance;
     Rigidbody2D rb;
     Transform trans;
 
@@ -13,21 +13,27 @@ public class CatController : MonoBehaviour
     float vertSpeed = 0.1f;
     float horSpeed = 0.1f;
     public GameObject[] Bullets;
+    public ParticleSystem[] Bombs;
 
     private int currentBulletIndex = 0;
+    private int currentBombIndex = 0;
+
     public float shootCooldownTime = 0.1f;
 
     private float shootCooldownTimer;
 
-    public Transform topBound;
-    public Transform leftBound;
-    public Transform rightBound;
-    public Transform botBound;
+    public Transform barrelLoc;
+
+    public int bombCount;
+
+    public delegate void BombUsed();
+    public BombUsed myBombUsed;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
+        instance = this;
     }
     // Start is called before the first frame update
     void Start()
@@ -48,7 +54,7 @@ public class CatController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            if(trans.position.y <= topBound.position.y)
+            if(trans.position.y <= GameManager.instance.topBound.position.y)
             {
                 yInc = vertSpeed;
             }
@@ -56,7 +62,7 @@ public class CatController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            if (trans.position.y >= botBound.position.y)
+            if (trans.position.y >= GameManager.instance.botBound.position.y)
             {
                 yInc = -vertSpeed;
             }
@@ -64,7 +70,7 @@ public class CatController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            if (trans.position.x >= leftBound.position.x)
+            if (trans.position.x >= GameManager.instance.leftBound.position.x)
             {
                 xInc = -horSpeed;
             }
@@ -72,7 +78,7 @@ public class CatController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            if (trans.position.x <= rightBound.position.x)
+            if (trans.position.x <= GameManager.instance.rightBound.position.x)
             {
                 xInc = horSpeed;
             }
@@ -90,11 +96,19 @@ public class CatController : MonoBehaviour
                 shootCooldownTimer = 0;
             }
         }
+
+        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift))
+        {
+            if (bombCount > 0)
+            {
+                UseBomb();
+            }
+        }
     }
 
     void FireWeapon()
     {
-        Bullets[currentBulletIndex].transform.position = trans.position;
+        Bullets[currentBulletIndex].transform.position = barrelLoc.position;
         Bullets[currentBulletIndex].transform.gameObject.SetActive(true);
 
         if (currentBulletIndex < Bullets.Length - 1)
@@ -107,6 +121,29 @@ public class CatController : MonoBehaviour
             currentBulletIndex = 0;
 
         }
+    }
+
+    void UseBomb()
+    {
+        bombCount--;
+        if (currentBombIndex < Bombs.Length - 1)
+        {
+            currentBombIndex++;
+
+        }
+        else
+        {
+            currentBombIndex = 0;
+
+        }
+        UIManager.instance.UpdateBombCount(bombCount);
+
+        Bombs[currentBombIndex].transform.position = trans.position;
+        Bombs[currentBombIndex].gameObject.SetActive(true);
+        Bombs[currentBombIndex].Play();
+
+        myBombUsed();
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -130,6 +167,15 @@ public class CatController : MonoBehaviour
         {
             trans.gameObject.SetActive(false);
             GameManager.instance.GameOver();
+        }
+    }
+
+    public void UpgradePickedUp(int _type)
+    {
+        if(_type == 0)//bomb
+        {
+            bombCount++;
+            UIManager.instance.UpdateBombCount(bombCount);
         }
     }
 }
