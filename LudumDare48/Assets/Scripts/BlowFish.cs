@@ -25,8 +25,15 @@ public class BlowFish : EnemyFish
     {
         sr.color = initColor;
         trans.localScale = initScale;
-        trans.DOScale(2, puffTime);
-        sr.DOColor(Color.red, puffTime).SetEase(Ease.InQuad).OnComplete(() => { Die(); }) ;
+        trans.DOScale(2, puffTime).OnComplete(() => { Die(); });
+        spikeGroup.transform.parent = trans;
+        spikeGroup.transform.position = trans.position;
+        spikeGroup.transform.gameObject.SetActive(false);
+        spikeGroup.transform.localScale = new Vector3(2, 2, 2);
+        for(int i = 0; i < spikeGroup.transform.childCount; i++)
+        {
+            spikeGroup.transform.GetChild(i).position = transform.position;
+        }
 
     }
     public override void FishMovement()

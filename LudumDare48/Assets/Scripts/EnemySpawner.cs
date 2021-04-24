@@ -53,6 +53,7 @@ public class EnemySpawner : MonoBehaviour
         if(enemiesSpawned >= EnemyPrefabs.Length)
         {
             spawning = false;
+            GameManager.instance.SpawnerDeactivated();
         }
 
         

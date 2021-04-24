@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class JellyFish : EnemyFish
 {
-    public float horSpeed = -0.05f;
+    public float horSpeed = -0.07f;
     // Start is called before the first frame update
     void Start()
     {

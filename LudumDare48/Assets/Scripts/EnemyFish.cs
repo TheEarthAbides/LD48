@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public abstract class EnemyFish : MonoBehaviour
 {
     public float damage = 100;
@@ -15,12 +15,6 @@ public abstract class EnemyFish : MonoBehaviour
         trans = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
     }
 
     // Update is called once per frame
@@ -42,7 +36,8 @@ public abstract class EnemyFish : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        sr.color = Color.white;
+        Color initColor = sr.color;
+        sr.DOColor(Color.white, 0.05f).OnComplete(() => { sr.DOColor(initColor, 0.05f); }) ;
         if(health <= 0)
         {
             Die();

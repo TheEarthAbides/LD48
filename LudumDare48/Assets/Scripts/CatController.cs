@@ -19,6 +19,11 @@ public class CatController : MonoBehaviour
 
     private float shootCooldownTimer;
 
+    public Transform topBound;
+    public Transform leftBound;
+    public Transform rightBound;
+    public Transform botBound;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -43,22 +48,34 @@ public class CatController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
         {
-            yInc = vertSpeed;
+            if(trans.position.y <= topBound.position.y)
+            {
+                yInc = vertSpeed;
+            }
         }
 
         if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
         {
-            yInc = -vertSpeed;
+            if (trans.position.y >= botBound.position.y)
+            {
+                yInc = -vertSpeed;
+            }
         }
 
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            xInc = -horSpeed;
+            if (trans.position.x >= leftBound.position.x)
+            {
+                xInc = -horSpeed;
+            }
         }
 
         if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            xInc = horSpeed;
+            if (trans.position.x <= rightBound.position.x)
+            {
+                xInc = horSpeed;
+            }
         }
 
         rb.MovePosition(new Vector2(trans.position.x + xInc, trans.position.y + yInc));
