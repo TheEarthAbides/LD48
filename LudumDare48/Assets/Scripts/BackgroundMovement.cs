@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class BackgroundMovement : MonoBehaviour
 {
-    float horScroll = -0.0001f;
-    float verScroll = 0.001f;
+    float horScroll = -0.001f;
+    float verScroll = 0.0003f;
+
     // Start is called before the first frame update
     void Start()
     {

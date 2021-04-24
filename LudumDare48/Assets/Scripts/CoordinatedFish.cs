@@ -40,7 +40,9 @@ public class CoordinatedFish : EnemyFish
             Die();
         }
 
-        
+        BoundaryCheck();
+
+
     }
 
     public override void FishMovement()

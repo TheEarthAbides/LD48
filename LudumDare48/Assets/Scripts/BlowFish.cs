@@ -20,6 +20,9 @@ public class BlowFish : EnemyFish
     void Update()
     {
         FishMovement();
+
+        BoundaryCheck();
+
     }
     public override void initValues(Transform[] _waypoints)
     {

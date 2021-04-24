@@ -16,6 +16,9 @@ public class JellyFish : EnemyFish
     void Update()
     {
         FishMovement();
+
+        BoundaryCheck();
+
     }
 
     public override void FishMovement()
