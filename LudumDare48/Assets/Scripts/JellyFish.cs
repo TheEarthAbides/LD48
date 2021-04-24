@@ -5,6 +5,7 @@ using UnityEngine;
 public class JellyFish : EnemyFish
 {
     public float horSpeed = -0.07f;
+    public float verSpeed = 0.01f;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +20,6 @@ public class JellyFish : EnemyFish
 
     public override void FishMovement()
     {
-        rb.MovePosition(new Vector2(trans.position.x + horSpeed, trans.position.y));
+        rb.MovePosition(new Vector2(trans.position.x + horSpeed, trans.position.y + verSpeed));
     }    
 }
