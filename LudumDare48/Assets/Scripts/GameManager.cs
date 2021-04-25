@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public class LevelStep
     {
         public EnemySpawner[] spawners;
+        public float delayBetweenWaves = 0;
     }
 
     public Transform topBound;
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
     public LevelStep[] steps;
     public float ActiveSpawners;
     // Start is called before the first frame update
+    private bool countingDown;
+    private float delayTimer;
     void Awake()
     {
         instance = this;
@@ -29,6 +32,19 @@ public class GameManager : MonoBehaviour
     {
         Invoke("StartGame", 0.5f);
         //StartGame();
+    }
+
+    private void Update()
+    {
+        if(countingDown)
+        {
+            delayTimer -= Time.deltaTime;
+            if(delayTimer <= 0)
+            {
+                NextStep();
+                countingDown = false;
+            }
+        }
     }
 
     public void StartGame()
@@ -48,15 +64,21 @@ public class GameManager : MonoBehaviour
     public void SpawnerDeactivated()
     {
         ActiveSpawners--;
-        if(ActiveSpawners <= 0)
+        if (ActiveSpawners <= 0)
         {
-            NextStep();
+            stepIndex++;
+
+            countingDown = true;
+
+            if (stepIndex < steps.Length)
+            {
+                delayTimer = steps[stepIndex].delayBetweenWaves;
+
+            }
         }
     }
-
     public void NextStep()
     {
-        stepIndex++;
         if (stepIndex < steps.Length)
         {
             for (int i = 0; i < steps[stepIndex].spawners.Length; i++)

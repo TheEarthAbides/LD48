@@ -21,14 +21,18 @@ public class BlowFish : EnemyFish
     {
         FishMovement();
 
+                
+        
         BoundaryCheck();
 
     }
     public override void initValues(Transform[] _waypoints)
     {
-        sr.color = initColor;
-        trans.localScale = initScale;
-        trans.DOScale(2, puffTime).OnComplete(() => { Die(); });
+        //sr.color = initColor;
+        //trans.localScale = initScale;
+        //trans.DOScale(2, puffTime).OnComplete(() => { Die(); });
+        base.initValues(_waypoints);
+
         spikeGroup.transform.parent = trans;
         spikeGroup.transform.position = trans.position;
         spikeGroup.transform.gameObject.SetActive(false);
@@ -42,6 +46,11 @@ public class BlowFish : EnemyFish
     public override void FishMovement()
     {
         rb.MovePosition(new Vector2(trans.position.x + horSpeed, trans.position.y + vertSpeed));
+
+        if(Vector3.Distance(CatController.instance.transform.position, trans.position) < 6)
+        {
+            anim.SetTrigger("Swell");
+        }
     }
     
     public override void Die()

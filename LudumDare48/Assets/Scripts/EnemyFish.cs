@@ -10,7 +10,8 @@ public abstract class EnemyFish : MonoBehaviour
     protected Transform trans;
     protected Rigidbody2D rb;
     protected SpriteRenderer sr;
-
+    protected Animator anim;
+    protected ParticleSystem ps;
     
 
     private void Awake()
@@ -18,8 +19,19 @@ public abstract class EnemyFish : MonoBehaviour
         trans = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-        CatController.instance.myBombUsed += BombKilled;
+        if(trans.childCount > 0)
+        {
+            ps = trans.Find("DeathParticles").GetComponent<ParticleSystem>();
 
+        }
+
+        if (GetComponent<Animator>())
+        {
+            anim = GetComponent<Animator>();
+        }
+
+        CatController.instance.myBombUsed += BombKilled;
+        Debug.Log(ps);
     }
 
     private void Start()
@@ -36,7 +48,7 @@ public abstract class EnemyFish : MonoBehaviour
 
     public void BoundaryCheck()
     {
-        if(trans.position.x < GameManager.instance.leftBound.position.x - 5)
+        if(trans.position.x < GameManager.instance.leftBound.position.x - 6)
         {
             Die();
         }
@@ -49,7 +61,8 @@ public abstract class EnemyFish : MonoBehaviour
 
     public virtual void initValues(Transform [] _waypoints)
     {
-       
+        ps.transform.parent = trans;
+        ps.gameObject.SetActive(false);
     }
 
     public void BombKilled()
@@ -73,7 +86,7 @@ public abstract class EnemyFish : MonoBehaviour
     {
         health -= damage;
         Color initColor = sr.color;
-        sr.DOColor(Color.white, 0.05f).OnComplete(() => { sr.DOColor(initColor, 0.05f); }) ;
+        sr.DOColor(Color.red, 0.05f).OnComplete(() => { sr.DOColor(initColor, 0.05f); }) ;
         if(health <= 0)
         {
             KilledByPlayer();
@@ -83,6 +96,16 @@ public abstract class EnemyFish : MonoBehaviour
     public virtual void Die()
     {
         transform.gameObject.SetActive(false);
+        if(ps != null)
+        {
+            ps.transform.parent = null;
+            ps.transform.localScale = Vector3.one;
+
+            ps.gameObject.SetActive(true);
+            ps.Play();
+        }
+       
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

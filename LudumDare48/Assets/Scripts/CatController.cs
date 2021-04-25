@@ -55,7 +55,7 @@ public class CatController : MonoBehaviour
 
         invulnTime -= Time.deltaTime;
 
-        Debug.Log(100 * Mathf.Sin(Time.time));
+        //Debug.Log(100 * Mathf.Sin(Time.time));
         skrBubble.SetBlendShapeWeight(0, Mathf.Abs( 100 * Mathf.Sin(Time.time)));
     }
 
@@ -205,6 +205,12 @@ public class CatController : MonoBehaviour
         {
             bombCount++;
             UIManager.instance.UpdateBombCount(bombCount);
+        }
+        if (_type == 1)//bubbles
+        {
+            health = Mathf.Min(100,  health + 50);
+            skrBubble.SetBlendShapeWeight(1, health);
+
         }
     }
 }
