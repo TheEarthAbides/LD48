@@ -8,8 +8,9 @@ public class GameManager : MonoBehaviour
     [System.Serializable]
     public class LevelStep
     {
-        public EnemySpawner[] spawners;
         public float delayBetweenWaves = 0;
+
+        public EnemySpawner[] spawners;
     }
 
     public Transform topBound;
