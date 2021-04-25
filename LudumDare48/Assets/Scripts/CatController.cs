@@ -1,13 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using DG.Tweening;
 public class CatController : MonoBehaviour
 {
     public static CatController instance;
     Rigidbody2D rb;
     Transform trans;
-
+    private Animator anim;
     public float health = 100;
 
     float vertSpeed = 0.1f;
@@ -29,10 +29,17 @@ public class CatController : MonoBehaviour
     public delegate void BombUsed();
     public BombUsed myBombUsed;
 
+    public float invulnTime = 0.25f;
+
+    private SpriteRenderer sr;
+    private SkinnedMeshRenderer skrBubble;
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
+        anim = GetComponent<Animator>();
+        sr = GetComponent<SpriteRenderer>();
+        skrBubble = GetComponentInChildren<SkinnedMeshRenderer>();
         instance = this;
     }
     // Start is called before the first frame update
@@ -45,6 +52,11 @@ public class CatController : MonoBehaviour
     void Update()
     {
         PlayerInputs();
+
+        invulnTime -= Time.deltaTime;
+
+        Debug.Log(100 * Mathf.Sin(Time.time));
+        skrBubble.SetBlendShapeWeight(0, Mathf.Abs( 100 * Mathf.Sin(Time.time)));
     }
 
     void PlayerInputs()
@@ -141,8 +153,10 @@ public class CatController : MonoBehaviour
         Bombs[currentBombIndex].transform.position = trans.position;
         Bombs[currentBombIndex].gameObject.SetActive(true);
         Bombs[currentBombIndex].Play();
-
-        myBombUsed();
+        if (myBombUsed != null)
+        {
+            myBombUsed();
+        }        //myBombUsed();
 
     }
 
@@ -161,13 +175,28 @@ public class CatController : MonoBehaviour
 
     private void TakeDamage(float _damage)
     {
-        health -= _damage;
-
-        if(health <= 0)
+        if(invulnTime <= 0)
         {
-            trans.gameObject.SetActive(false);
-            GameManager.instance.GameOver();
+            health -= _damage;
+
+            if (health <= 0)
+            {
+                trans.gameObject.SetActive(false);
+                GameManager.instance.GameOver();
+                skrBubble.gameObject.SetActive(false);
+
+            }
+            else
+            {
+                anim.SetTrigger("hit");
+                sr.DOColor(Color.red, 0.1f).OnComplete(() => { sr.DOColor(Color.white, 0.1f); });
+                invulnTime = 0.25f;
+
+                skrBubble.SetBlendShapeWeight(1, health);
+                
+            }
         }
+       
     }
 
     public void UpgradePickedUp(int _type)

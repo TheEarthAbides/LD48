@@ -24,7 +24,6 @@ public class CoordinatedFish : EnemyFish
             {
                 //direction to next waypoint
                 Vector3 direction = (waypoints[waypointIndex + 1].position - waypoints[waypointIndex].position).normalized;
-                Debug.Log(direction.x + " " + direction.y);
                 rb.MovePosition(new Vector2(trans.position.x + direction.x * moveSpeed, trans.position.y + direction.y * moveSpeed));
                 Debug.Log((waypoints[waypointIndex + 1].position - trans.position).magnitude);
                 distanceToWaypoint = Vector3.Distance(trans.position, waypoints[waypointIndex + 1].position);

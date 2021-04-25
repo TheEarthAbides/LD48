@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 100
   health: 100
+  points: 5
   horSpeed: -0.05
   vertSpeed: 0.01
   initScale: {x: 0.5, y: 0.5, z: 0.5}
@@ -242,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cee7c447659d3e40931b5a255d46e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 20
   horSpeed: 0.1
   vertSpeed: 0.1
 --- !u!50 &115727345650422544
@@ -390,7 +391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cee7c447659d3e40931b5a255d46e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 20
   horSpeed: 0.1
   vertSpeed: 0.1
 --- !u!50 &8329339889342688477
@@ -572,7 +573,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cee7c447659d3e40931b5a255d46e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 20
   horSpeed: 0.1
   vertSpeed: 0.1
 --- !u!50 &276564629243460448
@@ -720,7 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cee7c447659d3e40931b5a255d46e4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
+  damage: 20
   horSpeed: 0.1
   vertSpeed: 0.1
 --- !u!50 &8704782222679848584
