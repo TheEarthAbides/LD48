@@ -27,7 +27,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartGame();
+        Invoke("StartGame", 0.5f);
+        //StartGame();
     }
 
     public void StartGame()

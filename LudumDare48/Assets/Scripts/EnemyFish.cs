@@ -19,6 +19,11 @@ public abstract class EnemyFish : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         CatController.instance.myBombUsed += BombKilled;
+
+    }
+
+    private void Start()
+    {
     }
 
     // Update is called once per frame
@@ -64,7 +69,7 @@ public abstract class EnemyFish : MonoBehaviour
 
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
         Color initColor = sr.color;

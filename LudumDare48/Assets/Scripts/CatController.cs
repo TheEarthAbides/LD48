@@ -34,6 +34,8 @@ public class CatController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         trans = GetComponent<Transform>();
         instance = this;
+
+  
     }
     // Start is called before the first frame update
     void Start()
@@ -141,8 +143,10 @@ public class CatController : MonoBehaviour
         Bombs[currentBombIndex].transform.position = trans.position;
         Bombs[currentBombIndex].gameObject.SetActive(true);
         Bombs[currentBombIndex].Play();
-
-        myBombUsed();
+        if (myBombUsed != null)
+        {
+            myBombUsed();
+        }        //myBombUsed();
 
     }
 
