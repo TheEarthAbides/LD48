@@ -52,7 +52,16 @@ public class BlowFish : EnemyFish
             anim.SetTrigger("Swell");
         }
     }
-    
+
+    public override void BombKilled()
+    {
+        gameObject.SetActive(false);
+        UIManager.instance.UpdatePoints(points);
+        UpgradeManager.instance.RollForUpgrade(trans.position);
+    }
+
+
+
     public override void Die()
     {
         base.Die();

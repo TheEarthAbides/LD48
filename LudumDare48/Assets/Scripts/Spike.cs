@@ -14,8 +14,13 @@ public class Spike : MonoBehaviour
     {
         trans = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
-    }
+        CatController.instance.myBombUsed += BombKilled;
 
+    }
+    void BombKilled()
+    {
+        gameObject.SetActive(false);
+    }
     // Update is called once per frame
     void Update()
     {
