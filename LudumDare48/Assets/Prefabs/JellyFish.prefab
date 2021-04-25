@@ -119,9 +119,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c580bb7fa784284b814b76f645d933e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 100
-  health: 100
+  damage: 40
+  health: 60
+  points: 5
   horSpeed: -0.07
+  verSpeed: 0.01
 --- !u!58 &108283813819445625
 CircleCollider2D:
   m_ObjectHideFlags: 0
