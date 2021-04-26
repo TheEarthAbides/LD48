@@ -10,10 +10,12 @@ public abstract class GenericUpgrade : MonoBehaviour
     public float horSpeed;
     public float vertSpeed;
     private SpriteRenderer srOutline;
+    public int UpgradeType;
     private void Awake()
     {
         trans = GetComponent<Transform>();
         rb = GetComponent<Rigidbody2D>();
+        if(trans.childCount > 0)
         srOutline = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 

@@ -25,12 +25,13 @@ public class CoordinatedFish : EnemyFish
                 //direction to next waypoint
                 Vector3 direction = (waypoints[waypointIndex + 1].position - waypoints[waypointIndex].position).normalized;
                 rb.MovePosition(new Vector2(trans.position.x + direction.x * moveSpeed, trans.position.y + direction.y * moveSpeed));
-                Debug.Log((waypoints[waypointIndex + 1].position - trans.position).magnitude);
+                //Debug.Log((waypoints[waypointIndex + 1].position - trans.position).magnitude);
                 distanceToWaypoint = Vector3.Distance(trans.position, waypoints[waypointIndex + 1].position);
-
+                RotateToWaypoint(direction);
                 if (distanceToWaypoint < 0.2f)
                 {
                     waypointIndex++;
+                    
                 }
             }
         }
@@ -44,6 +45,15 @@ public class CoordinatedFish : EnemyFish
 
     }
 
+    public void RotateToWaypoint(Vector3 _direction)
+    {
+        float offset = 180;
+        float angle = Mathf.Atan2(_direction.y, _direction.x) * Mathf.Rad2Deg;
+        Quaternion q = Quaternion.AngleAxis(angle, Vector3.left);
+        transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
+
+    }
+
     public override void FishMovement()
     {
 
@@ -51,7 +61,7 @@ public class CoordinatedFish : EnemyFish
 
     public override void initValues(Transform[] _waypoints)
     {
-        
+        base.initValues(_waypoints);
         waypoints = _waypoints;
     }
 }

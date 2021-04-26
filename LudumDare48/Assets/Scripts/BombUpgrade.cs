@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BombUpgrade : GenericUpgrade
 {
-    public int UpgradeType = 0;
     public void OnTriggerEnter2D (Collider2D other)
     {
         Debug.Log("collided with upgrade");
