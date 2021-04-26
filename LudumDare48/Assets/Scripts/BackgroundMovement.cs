@@ -18,7 +18,8 @@ public class BackgroundMovement : MonoBehaviour
     }
     void Start()
     {
-        
+        horScroll *= 5;
+        verScroll *= 5;
     }
 
     // Update is called once per frame
@@ -32,9 +33,21 @@ public class BackgroundMovement : MonoBehaviour
         {
             if(transform.position.x < CatController.instance.transform.position.x - 60)
             {
-                transform.position = new Vector3(transform.position.x - totalhor * 2, transform.position.y - totalvert * 2 + 5, transform.position.z);
-                totalhor = 0;
-                totalvert = 0;
+                //Vector3 newPos = new Vector3(transform.position.x - totalhor * 2, transform.position.y - totalvert * 2 + 5, transform.position.z);
+                Vector3 newPos = new Vector3(45, -37, 13);
+
+                Debug.Log(newPos);
+
+                Debug.Log(totalhor);
+                Debug.Log(totalvert);
+
+                transform.position = newPos;
+                totalhor = - totalhor/2;
+                totalvert = - totalvert/2;
+
+
+                Debug.Log(totalhor);
+                Debug.Log(totalvert);
             }
         }
     }

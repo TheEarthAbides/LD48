@@ -31,7 +31,6 @@ public abstract class EnemyFish : MonoBehaviour
         }
 
         CatController.instance.myBombUsed += BombKilled;
-        Debug.Log(ps);
     }
 
     private void Start()

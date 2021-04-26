@@ -28,7 +28,7 @@ public class CoordinatedFish : EnemyFish
                 //Debug.Log((waypoints[waypointIndex + 1].position - trans.position).magnitude);
                 distanceToWaypoint = Vector3.Distance(trans.position, waypoints[waypointIndex + 1].position);
                 RotateToWaypoint(direction);
-                if (distanceToWaypoint < 0.2f)
+                if (distanceToWaypoint < 0.5f)
                 {
                     waypointIndex++;
                     
@@ -63,5 +63,6 @@ public class CoordinatedFish : EnemyFish
     {
         base.initValues(_waypoints);
         waypoints = _waypoints;
+        waypointIndex = 0;
     }
 }
