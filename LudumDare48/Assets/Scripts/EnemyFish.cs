@@ -31,7 +31,6 @@ public abstract class EnemyFish : MonoBehaviour
         }
 
         CatController.instance.myBombUsed += BombKilled;
-        Debug.Log(ps);
     }
 
     private void Start()
@@ -61,9 +60,14 @@ public abstract class EnemyFish : MonoBehaviour
 
     public virtual void initValues(Transform [] _waypoints)
     {
-        ps.transform.parent = trans;
-        ps.transform.localPosition = Vector3.zero;
-        ps.gameObject.SetActive(false);
+        gameObject.SetActive(true);
+        if(ps)
+        {
+            ps.transform.parent = trans;
+            ps.transform.localPosition = Vector3.zero;
+            ps.gameObject.SetActive(false);
+        }
+  
     }
 
     public virtual void BombKilled()

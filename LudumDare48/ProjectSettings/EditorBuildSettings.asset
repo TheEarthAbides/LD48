@@ -11,7 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: b06e78ddb42792242bda7b50f66f65cb
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/jimmyscene.unity
+    guid: d9f43aa492a15294da35b0904d1a17be
   m_configObjects: {}

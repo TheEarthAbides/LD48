@@ -44,13 +44,14 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemy()
     {
-        EnemyPrefabs[enemiesSpawned].transform.position = new Vector2(transform.position.x + Random.RandomRange(-spawnLocVariance.x, spawnLocVariance.x), transform.position.y +  Random.RandomRange(-spawnLocVariance.y, spawnLocVariance.y));
-        EnemyPrefabs[enemiesSpawned].SetActive(true);
+        EnemyPrefabs[enemiesSpawned].transform.position = new Vector2(transform.position.x + Random.Range(-spawnLocVariance.x, spawnLocVariance.x), transform.position.y +  Random.Range(-spawnLocVariance.y, spawnLocVariance.y));
         EnemyPrefabs[enemiesSpawned].GetComponent<EnemyFish>().initValues(waypoints);
+
+        EnemyPrefabs[enemiesSpawned].SetActive(true);
 
         enemiesSpawned++;
 
-        if(enemiesSpawned >= EnemyPrefabs.Length)
+        if(enemiesSpawned >= enemiesToSpawn)
         {
             spawning = false;
             GameManager.instance.SpawnerDeactivated();

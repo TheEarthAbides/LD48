@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public Transform rightBound;
     public Transform botBound;
 
-    public int stepIndex;
+    public int stepIndex = 3;
     public LevelStep[] steps;
     public float ActiveSpawners;
     // Start is called before the first frame update
@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         stepIndex = 0;
+
         UIManager.instance.pointsLabel.text = "0";
         UIManager.instance.bombCount.text = "3";
         UIManager.instance.totalPoints = 0;
