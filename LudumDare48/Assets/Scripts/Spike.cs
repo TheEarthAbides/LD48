@@ -9,7 +9,7 @@ public class Spike : MonoBehaviour
     public float damage;
     public float horSpeed = 0.1f;
     public float vertSpeed = 0.1f;
-
+    public bool BossSpike;
     private void Awake()
     {
         trans = GetComponent<Transform>();
@@ -26,22 +26,31 @@ public class Spike : MonoBehaviour
     {
         if(trans.gameObject.activeInHierarchy)
         {
-            if (trans.GetSiblingIndex() == 0)
+            if(BossSpike)
             {
-                rb.MovePosition(new Vector2(trans.position.x - horSpeed, trans.position.y + vertSpeed));
+                rb.MovePosition(new Vector2(trans.position.x + horSpeed, trans.position.y));
+
             }
-            else if(trans.GetSiblingIndex() == 1)
+            else
             {
-                rb.MovePosition(new Vector2(trans.position.x - horSpeed, trans.position.y - vertSpeed));
+                if (trans.GetSiblingIndex() == 0)
+                {
+                    rb.MovePosition(new Vector2(trans.position.x - horSpeed, trans.position.y + vertSpeed));
+                }
+                else if (trans.GetSiblingIndex() == 1)
+                {
+                    rb.MovePosition(new Vector2(trans.position.x - horSpeed, trans.position.y - vertSpeed));
+                }
+                else if (trans.GetSiblingIndex() == 2)
+                {
+                    rb.MovePosition(new Vector2(trans.position.x + horSpeed, trans.position.y + vertSpeed));
+                }
+                else if (trans.GetSiblingIndex() == 3)
+                {
+                    rb.MovePosition(new Vector2(trans.position.x + horSpeed, trans.position.y - vertSpeed));
+                }
             }
-            else if(trans.GetSiblingIndex() == 2)
-            {
-                rb.MovePosition(new Vector2(trans.position.x + horSpeed, trans.position.y + vertSpeed));
-            }
-            else if(trans.GetSiblingIndex() == 3)
-            {
-                rb.MovePosition(new Vector2(trans.position.x + horSpeed, trans.position.y - vertSpeed));
-            }
+           
         }
         
     }
