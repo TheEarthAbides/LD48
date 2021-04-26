@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -24,6 +25,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     private bool countingDown;
     private float delayTimer;
+
+    public CanvasGroup Credits;
     void Awake()
     {
         instance = this;
@@ -53,7 +56,7 @@ public class GameManager : MonoBehaviour
         stepIndex = 0;
 
         UIManager.instance.pointsLabel.text = "0";
-        UIManager.instance.bombCount.text = "3";
+        UIManager.instance.bombCount.text = "2";
         UIManager.instance.totalPoints = 0;
 
         for (int i = 0; i < steps[stepIndex].spawners.Length; i++)
@@ -68,6 +71,7 @@ public class GameManager : MonoBehaviour
         ActiveSpawners--;
         if (ActiveSpawners <= 0)
         {
+            if(stepIndex < steps.Length)
             stepIndex++;
 
             countingDown = true;
@@ -91,14 +95,24 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            LevelComplete();
         }
       
     }
 
     public void LevelComplete()
     {
+        ShowCredits();
+    }
+    public void ShowCredits()
+    {
+        Credits.gameObject.SetActive(true);
+        Credits.DOFade(1, 2);
+        Debug.LogError("SHOWING CREDITS");
+    }
 
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(2);
     }
 
     public void GameOver()

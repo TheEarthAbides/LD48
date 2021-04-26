@@ -112,4 +112,21 @@ public class BossFish : EnemyFish
         }
 
     }
+
+    public override void BombKilled()
+    {
+        if (gameObject.activeInHierarchy)
+        {
+            TakeDamage(300);
+        }
+
+    }
+
+    public override void Die()
+    {
+        GameManager.instance.LevelComplete();
+        Debug.LogError("LEVEL COMPLETE");
+        base.Die();
+
+    }
 }

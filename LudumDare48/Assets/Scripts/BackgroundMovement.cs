@@ -36,18 +36,18 @@ public class BackgroundMovement : MonoBehaviour
                 //Vector3 newPos = new Vector3(transform.position.x - totalhor * 2, transform.position.y - totalvert * 2 + 5, transform.position.z);
                 Vector3 newPos = new Vector3(45, -37, 13);
 
-                Debug.Log(newPos);
+                //Debug.Log(newPos);
 
-                Debug.Log(totalhor);
-                Debug.Log(totalvert);
+                //Debug.Log(totalhor);
+                //Debug.Log(totalvert);
 
                 transform.position = newPos;
                 totalhor = - totalhor/2;
                 totalvert = - totalvert/2;
 
 
-                Debug.Log(totalhor);
-                Debug.Log(totalvert);
+                //Debug.Log(totalhor);
+                //Debug.Log(totalvert);
             }
         }
     }

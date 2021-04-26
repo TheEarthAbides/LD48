@@ -54,9 +54,16 @@ public class EnemySpawner : MonoBehaviour
         if(enemiesSpawned >= enemiesToSpawn)
         {
             spawning = false;
+            enemiesSpawned = 0;
+            gameObject.SetActive(false);
             GameManager.instance.SpawnerDeactivated();
         }
 
         
+    }
+
+    public void OnEnable()
+    {
+        spawning = true;
     }
 }

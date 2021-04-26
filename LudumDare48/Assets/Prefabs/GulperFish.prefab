@@ -145,7 +145,7 @@ MonoBehaviour:
   points: 5
   idleHorSpeed: -0.07
   idleVertSpeed: 0.01
-  chargeSpeed: 0.1
+  chargeSpeed: 0.2
 --- !u!61 &1331874761
 BoxCollider2D:
   m_ObjectHideFlags: 0

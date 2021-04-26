@@ -120,6 +120,7 @@ public class CatController : MonoBehaviour
 
     void FireWeapon()
     {
+        AudioManager.instance.PlayClip(AudioManager.instance.shoot, 1);
         Bullets[currentBulletIndex].transform.position = barrelLoc.position;
         Bullets[currentBulletIndex].transform.gameObject.SetActive(true);
 
@@ -138,6 +139,8 @@ public class CatController : MonoBehaviour
     void UseBomb()
     {
         bombCount--;
+        AudioManager.instance.PlayClip(AudioManager.instance.bomb, 1);
+
         if (currentBombIndex < Bombs.Length - 1)
         {
             currentBombIndex++;
@@ -177,6 +180,8 @@ public class CatController : MonoBehaviour
     {
         if(invulnTime <= 0)
         {
+            AudioManager.instance.PlayClip(AudioManager.instance.hit, 1);
+
             health -= _damage;
 
             if (health <= 0)
@@ -201,7 +206,9 @@ public class CatController : MonoBehaviour
 
     public void UpgradePickedUp(int _type)
     {
-        if(_type == 0)//bomb
+        AudioManager.instance.PlayClip(AudioManager.instance.bubble, 1);
+
+        if (_type == 0)//bomb
         {
             bombCount++;
             UIManager.instance.UpdateBombCount(bombCount);

@@ -25,9 +25,8 @@ public class UIManager : MonoBehaviour
     {
         totalPoints += _points;
         pointsLabel.text = totalPoints.ToString();
-        pointsLabel.transform.localScale = Vector3.one;
-        DOTween.Clear(pointsLabel.transform);
-        pointsLabel.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f).SetLoops(1, LoopType.Yoyo) ;
+        pointsLabel.transform.localScale = Vector3.one;        
+        //pointsLabel.transform.DOScale(new Vector3(1.1f, 1.1f, 1.1f), 0.1f).SetLoops(1, LoopType.Yoyo) ;
 
     }
 }
